@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | AURORA Luxury Jewelry</title>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-section-container {
+            padding: 120px 0;
+            display: flex;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .contact-image-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .contact-image {
+            width: 100%;
+            height: 750px;
+            object-fit: cover;
+            border-radius: 400px 400px 30px 30px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--secondary-color);
+            border-radius: 400px 400px 30px 30px;
+            z-index: 1;
+        }
+
+        .contact-content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-info {
+            margin-bottom: 50px;
+        }
+
+        .contact-info h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            line-height: 1.1;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 1rem;
+            line-height: 1.8;
+            max-width: 90%;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .info-item i {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+
+        .info-item h4 {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-color);
+        }
+
+        .info-item span {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .contact-form {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0px;
+            color: var(--primary-color);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            font-family: var(--font-body);
+            background: transparent;
+            color: var(--primary-color);
+            outline: none;
+            font-size: 1.05rem;
+            transition: var(--transition-fast);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-bottom-color: var(--secondary-color);
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        @media (max-width: 1000px) {
+            .contact-section-container {
+                flex-direction: column;
+                gap: 60px;
+            }
+
+            .contact-image {
+                height: 500px;
+                border-radius: 250px 250px 20px 20px;
+            }
+
+            .contact-image-wrapper::before {
+                border-radius: 250px 250px 20px 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                flex-direction: column;
+                margin-bottom: 0;
+            }
+
+            .form-row .form-group {
+                margin-bottom: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">AURORA</a>
+
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="collections.html" class="nav-link">Collections</a>
+                <a href="about.html" class="nav-link">Brand Story</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-icons">
+                <i class="fa-solid fa-magnifying-glass" title="Search"></i>
+                <a href="favourite.html"><i class="fa-regular fa-heart" title="Wishlist"></i></a>
+                <a href="addedtocart.html"><i class="fa-solid fa-bag-shopping" title="Cart"></i></a>
+                <button class="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero Section -->
+    <section class="hero page-hero">
+        <div class="hero-bg reveal-image"
+            style="background-image: url('https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg');">
+        </div>
+        <div class="particles"></div>
+        <div class="hero-content reveal-fade">
+            <h1 class="hero-title">Get in Touch</h1>
+            <p class="hero-subtitle">We are here to assist you with your luxury experience.</p>
+        </div>
+    </section>
+
+    <section class="container contact-section-container">
+        <div class="contact-image-wrapper reveal-card-left">
+            <img src="https://images.pexels.com/photos/1446161/pexels-photo-1446161.jpeg" class="contact-image"
+                alt="Luxury Concierge Service">
+        </div>
+
+        <div class="contact-content-wrapper reveal-card-right">
+            <div class="contact-info">
+                <h2 class="reveal-text">At Your Service</h2>
+                <p>Private viewings, bespoke commissions, or finding the perfect gift. Connect with our dedicated luxury
+                    concierge to fulfill your every desire.</p>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <h4>Boutique</h4>
+                            <span>727 Fifth Avenue<br>New York, NY</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <h4>Concierge</h4>
+                            <span>+1 (800) 555-0199</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label>Inquiry</label>
+                        <input type="text" placeholder="E.g., Bespoke Commission, Appointment" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 35px;">
+                        <label>Message</label>
+                        <textarea placeholder="How can we assist you?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 4px;">Send
+                        Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">AURORA</a>
+                    <p>Discover handcrafted luxury jewelry designed for moments that last forever. Timeless elegance
+                        guaranteed.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AURORA ATELIER. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-close"><i class="fa-solid fa-xmark"></i></div>
+        <div class="search-container">
+            <h2>What are you looking for?</h2>
+            <form class="search-form"
+                onsubmit="event.preventDefault(); window.location.href='collections.html?search=' + encodeURIComponent(this.querySelector('input').value);">
+                <div class="search-input-group">
+                    <input type="text" placeholder="Search collections, products..." required>
+                    <button type="submit" class="search-btn"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </form>
+            <div class="search-suggestions">
+                <span>Popular:</span>
+                <a href="collections.html?search=Bridal">Bridal Sets</a>
+                <a href="collections.html?search=Eternity">Eternity Rings</a>
+                <a href="collections.html?search=Gold">Gold Chains</a>
+                <a href="collections.html?search=Bespoke">Bespoke</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

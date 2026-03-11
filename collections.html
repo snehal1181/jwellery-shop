@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections | AURORA Luxury Jewelry</title>
+    <meta name="description" content="Explore our luxurious jewelry collections.">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Filters */
+        .filter-bar {
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 30px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 10px 25px;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding-bottom: 100px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            /* For JS filtering */
+            border-radius: 8px;
+            aspect-ratio: 4 / 5;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+            display: block;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 15, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            opacity: 0;
+            transition: var(--transition-fast);
+        }
+
+        .gallery-overlay h3 {
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            transform: translateY(-20px);
+            transition: transform var(--transition-fast);
+        }
+
+        .gallery-overlay span {
+            color: var(--secondary-color);
+            transform: translateY(20px);
+            transition: transform var(--transition-fast) 0.1s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-overlay h3,
+        .gallery-item:hover .gallery-overlay span {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">AURORA</a>
+
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="collections.html" class="nav-link">Collections</a>
+                <a href="about.html" class="nav-link">Brand Story</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-icons">
+                <i class="fa-solid fa-magnifying-glass" title="Search"></i>
+                <a href="favourite.html"><i class="fa-regular fa-heart" title="Wishlist"></i></a>
+                <a href="addedtocart.html"><i class="fa-solid fa-bag-shopping" title="Cart"></i></a>
+                <button class="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero Section -->
+    <section class="hero page-hero">
+        <div class="hero-bg reveal-image"
+            style="background-image: url('https://images.pexels.com/photos/1446161/pexels-photo-1446161.jpeg');">
+        </div>
+        <div class="particles"></div>
+        <div class="hero-content reveal-fade">
+            <h1 class="hero-title">Fine Collections</h1>
+            <p class="hero-subtitle">Curated excellence for the modern connoisseur</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="filter-bar reveal-fade">
+            <button class="filter-btn active" data-filter="all">All Pieces</button>
+            <button class="filter-btn" data-filter="gold">Gold</button>
+            <button class="filter-btn" data-filter="diamonds">Diamonds</button>
+            <button class="filter-btn" data-filter="bridal">Bridal</button>
+            <button class="filter-btn" data-filter="new">New Arrivals</button>
+            <button class="filter-btn clear-search-btn"
+                style="display: none; border-color: var(--secondary-color); color: var(--secondary-color);"
+                onclick="window.location.href='collections.html'">Clear Search &times;</button>
+        </div>
+
+        <div class="gallery-grid" id="gallery-grid">
+            <div class="gallery-item reveal-image" data-category="diamonds">
+                <button class="wishlist-icon" title="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <button class="cart-icon" title="Add to Cart"><i class="fa-solid fa-cart-plus"></i></button>
+                <img src="https://images.pexels.com/photos/2735981/pexels-photo-2735981.jpeg" alt="Jewelry">
+                <div class="gallery-overlay">
+                    <h3>Eternity Ring</h3>
+                    <span>$14,500</span>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal-image" data-category="gold" style="transition-delay: 0.1s;">
+                <button class="wishlist-icon" title="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <button class="cart-icon" title="Add to Cart"><i class="fa-solid fa-cart-plus"></i></button>
+                <img src="https://cdn.pixabay.com/photo/2015/05/26/09/48/chain-784422_1280.jpg" alt="Jewelry">
+                <div class="gallery-overlay">
+                    <h3>Gold Chain</h3>
+                    <span>$4,100</span>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal-image" data-category="bridal" style="transition-delay: 0.2s;">
+                <button class="wishlist-icon" title="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <button class="cart-icon" title="Add to Cart"><i class="fa-solid fa-cart-plus"></i></button>
+                <img src="https://cdn.pixabay.com/photo/2023/05/23/09/23/pearl-8012322_1280.jpg" alt="Jewelry">
+                <div class="gallery-overlay">
+                    <h3>Pearl Drop</h3>
+                    <span>$3,850</span>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal-image" data-category="diamonds">
+                <button class="wishlist-icon" title="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <button class="cart-icon" title="Add to Cart"><i class="fa-solid fa-cart-plus"></i></button>
+                <img src="https://images.unsplash.com/photo-1549439602-43ebca2327af?q=80&w=800&auto=format&fit=crop"
+                    alt="Jewelry">
+                <div class="gallery-overlay">
+                    <h3>Bespoke Necklace</h3>
+                    <span>$28,900</span>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal-image" data-category="new" style="transition-delay: 0.1s;">
+                <button class="wishlist-icon" title="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <button class="cart-icon" title="Add to Cart"><i class="fa-solid fa-cart-plus"></i></button>
+                <img src="https://images.pexels.com/photos/33222148/pexels-photo-33222148.jpeg" alt="Jewelry">
+                <div class="gallery-overlay">
+                    <h3>Aura Pendant</h3>
+                    <span>$5,250</span>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal-image" data-category="gold" style="transition-delay: 0.2s;">
+                <button class="wishlist-icon" title="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <button class="cart-icon" title="Add to Cart"><i class="fa-solid fa-cart-plus"></i></button>
+                <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=1175&auto=format&fit=crop&ixlib=rb-4.1.0"
+                    alt="Jewelry">
+                <div class="gallery-overlay">
+                    <h3>Signature Cuff</h3>
+                    <span>$6,100</span>
+                </div>
+            </div>
+
+            <!-- Additional Items -->
+            <div class="gallery-item reveal-image" data-category="bridal">
+                <button class="wishlist-icon" title="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <button class="cart-icon" title="Add to Cart"><i class="fa-solid fa-cart-plus"></i></button>
+                <img src="https://images.unsplash.com/photo-1679156271456-d6068c543ee7?q=80&w=711&auto=format&fit=crop&ixlib=rb-4.1.0"
+                    alt="Jewelry">
+                <div class="gallery-overlay">
+                    <h3>Bridal Set</h3>
+                    <span>$12,400</span>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal-image" data-category="new" style="transition-delay: 0.1s;">
+                <button class="wishlist-icon" title="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <button class="cart-icon" title="Add to Cart"><i class="fa-solid fa-cart-plus"></i></button>
+                <img src="https://images.unsplash.com/photo-1689743801114-230453abfceb?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0"
+                    alt="Jewelry">
+                <div class="gallery-overlay">
+                    <h3>Modern Edge</h3>
+                    <span>$3,900</span>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal-image" data-category="gold" style="transition-delay: 0.2s;">
+                <button class="wishlist-icon" title="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <button class="cart-icon" title="Add to Cart"><i class="fa-solid fa-cart-plus"></i></button>
+                <img src="https://cdn.pixabay.com/photo/2020/01/14/16/22/opal-4765457_1280.jpg" alt="Jewelry">
+                <div class="gallery-overlay">
+                    <h3>Vintage Gold</h3>
+                    <span>$5,800</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">AURORA</a>
+                    <p>Discover handcrafted luxury jewelry designed for moments that last forever. Timeless elegance
+                        guaranteed.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 AURORA ATELIER. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-close"><i class="fa-solid fa-xmark"></i></div>
+        <div class="search-container">
+            <h2>What are you looking for?</h2>
+            <form class="search-form"
+                onsubmit="event.preventDefault(); window.location.href='collections.html?search=' + encodeURIComponent(this.querySelector('input').value);">
+                <div class="search-input-group">
+                    <input type="text" placeholder="Search collections, products..." required>
+                    <button type="submit" class="search-btn"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </form>
+            <div class="search-suggestions">
+                <span>Popular:</span>
+                <a href="collections.html?search=Bridal">Bridal Sets</a>
+                <a href="collections.html?search=Eternity">Eternity Rings</a>
+                <a href="collections.html?search=Gold">Gold Chains</a>
+                <a href="collections.html?search=Bespoke">Bespoke</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

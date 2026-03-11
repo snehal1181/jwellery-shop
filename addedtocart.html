@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | AURORA Luxury Jewelry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">AURORA</a>
+
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="collections.html" class="nav-link">Collections</a>
+                <a href="about.html" class="nav-link">Brand Story</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-icons">
+                <i class="fa-solid fa-magnifying-glass" title="Search"></i>
+                <a href="favourite.html"><i class="fa-regular fa-heart" title="Wishlist"></i></a>
+                <a href="addedtocart.html"><i class="fa-solid fa-bag-shopping" title="Cart"></i></a>
+                <button class="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero Section -->
+    <section class="hero page-hero">
+        <div class="hero-bg reveal-image"
+            style="background-image: url('https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1920&auto=format&fit=crop');">
+        </div>
+        <div class="particles"></div>
+        <div class="hero-content reveal-fade">
+            <h1 class="hero-title">Your Shopping Bag</h1>
+            <p class="hero-subtitle">Review your selected masterpieces</p>
+        </div>
+    </section>
+
+    <section class="container cart-section">
+        <div class="cart-container" id="cart-content">
+            <!-- Cart items will be injected here by JS -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">AURORA</a>
+                    <p>Discover handcrafted luxury jewelry designed for moments that last forever. Timeless elegance
+                        guaranteed.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AURORA ATELIER. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-close"><i class="fa-solid fa-xmark"></i></div>
+        <div class="search-container">
+            <h2>What are you looking for?</h2>
+            <form class="search-form"
+                onsubmit="event.preventDefault(); window.location.href='collections.html?search=' + encodeURIComponent(this.querySelector('input').value);">
+                <div class="search-input-group">
+                    <input type="text" placeholder="Search collections, products..." required>
+                    <button type="submit" class="search-btn"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </form>
+            <div class="search-suggestions">
+                <span>Popular:</span>
+                <a href="collections.html?search=Bridal">Bridal Sets</a>
+                <a href="collections.html?search=Eternity">Eternity Rings</a>
+                <a href="collections.html?search=Gold">Gold Chains</a>
+                <a href="collections.html?search=Bespoke">Bespoke</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

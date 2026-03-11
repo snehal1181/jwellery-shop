@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Story | AURORA Luxury Jewelry</title>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .story-section-page {
+            padding: 100px 0;
+            background-color: var(--bg-color);
+        }
+
+        .story-container-alt {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            margin-bottom: 150px;
+        }
+
+        .story-image-group {
+            flex: 1;
+            position: relative;
+            min-height: 500px;
+        }
+
+        .story-img-main {
+            width: 80%;
+            height: 500px;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--box-shadow-premium);
+            border-radius: 80px 10px 100px 20px;
+            transition: border-radius 0.5s ease;
+        }
+
+        .story-img-main:hover {
+            border-radius: 20px 100px 10px 80px;
+        }
+
+        .story-img-accent {
+            position: absolute;
+            width: 60%;
+            height: 400px;
+            object-fit: cover;
+            bottom: -50px;
+            right: 0;
+            z-index: 3;
+            border: 10px solid var(--bg-color);
+            box-shadow: var(--box-shadow-hover);
+            border-radius: 10px 60px 20px 80px;
+            transition: border-radius 0.5s ease;
+        }
+
+        .story-img-accent:hover {
+            border-radius: 80px 20px 60px 10px;
+        }
+
+        .story-image-group::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            width: 50%;
+            height: 50%;
+            border-top: 2px solid var(--secondary-color);
+            border-left: 2px solid var(--secondary-color);
+            z-index: 1;
+        }
+
+        .story-text-content {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .story-tagline {
+            color: var(--secondary-color);
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .story-text-content h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        .story-text-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .story-container-alt.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .story-container-alt.reverse .story-image-group::before {
+            left: auto;
+            right: -30px;
+            border-left: none;
+            border-right: 2px solid var(--secondary-color);
+        }
+
+        .story-container-alt.reverse .story-img-main {
+            margin-left: auto;
+        }
+
+        .story-container-alt.reverse .story-img-accent {
+            left: 0;
+            right: auto;
+        }
+
+        .story-container-alt.reverse .story-text-content {
+            padding-right: 0;
+            padding-left: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .story-container-alt {
+                flex-direction: column !important;
+                gap: 60px;
+                margin-bottom: 100px;
+            }
+
+            .story-image-group {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .story-img-main,
+            .story-img-accent {
+                position: static;
+                width: 100%;
+                height: 350px;
+                margin-bottom: 20px;
+                border: none;
+            }
+
+            .story-image-group::before {
+                display: none;
+            }
+
+            .story-text-content {
+                padding: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">AURORA</a>
+
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="collections.html" class="nav-link">Collections</a>
+                <a href="about.html" class="nav-link">Brand Story</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-icons">
+                <i class="fa-solid fa-magnifying-glass" title="Search"></i>
+                <a href="favourite.html"><i class="fa-regular fa-heart" title="Wishlist"></i></a>
+                <a href="addedtocart.html"><i class="fa-solid fa-bag-shopping" title="Cart"></i></a>
+                <button class="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero Section -->
+    <section class="hero page-hero">
+        <div class="hero-bg reveal-image"
+            style="background-image: url('https://images.pexels.com/photos/1446161/pexels-photo-1446161.jpeg');">
+        </div>
+        <div class="particles"></div>
+        <div class="hero-content reveal-fade">
+            <h1 class="hero-title">Our Heritage</h1>
+            <p class="hero-subtitle">Decades of excellence, crafted for eternity.</p>
+        </div>
+    </section>
+
+    <section class="story-section-page">
+        <div class="container">
+            <div class="story-container-alt">
+                <div class="story-image-group reveal-card-left">
+                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/23/accessory-1867039_1280.jpg"
+                        alt="Master Jeweler" class="story-img-main">
+                    <img src="https://images.pexels.com/photos/1446161/pexels-photo-1446161.jpeg" alt="Crafting details"
+                        class="story-img-accent reveal-image" style="transition-delay: 0.2s;">
+                </div>
+                <div class="story-text-content reveal-fade" style="transition-delay: 0.1s;">
+                    <span class="story-tagline">Our Genesis</span>
+                    <h2 class="reveal-text">The Art of Craftsmanship</h2>
+                    <p>Since our founding, AURORA has stood as a beacon of uncompromising quality and timeless design.
+                        Our master artisans blend centuries-old techniques with modern innovation to create pieces that
+                        are truly extraordinary.</p>
+                    <p>Every stone is hand-selected by our gemologists for its superior clarity, color, and brilliance.
+                        We believe that true luxury lies in the details that often go unseen.</p>
+                </div>
+            </div>
+
+            <div class="story-container-alt reverse">
+                <div class="story-image-group reveal-card-right">
+                    <img src="https://images.pexels.com/photos/33222148/pexels-photo-33222148.jpeg"
+                        alt="Sourcing Diamonds" class="story-img-main">
+                    <img src="https://images.pexels.com/photos/2735981/pexels-photo-2735981.jpeg"
+                        alt="Finished Diamond piece" class="story-img-accent reveal-image"
+                        style="transition-delay: 0.2s;">
+                </div>
+                <div class="story-text-content reveal-fade" style="transition-delay: 0.1s;">
+                    <span class="story-tagline">Our Promise</span>
+                    <h2 class="reveal-text">Ethically Sourced Excellence</h2>
+                    <p>We are profoundly committed to responsible sourcing. Every diamond and precious metal used in our
+                        collections is conflict-free and environmentally conscious.</p>
+                    <p>By partnering directly with responsible mines and maintaining a transparent supply chain, we
+                        ensure that the journey of your jewelry is as beautiful as the piece itself.</p>
+                </div>
+            </div>
+
+            <div class="story-container-alt" style="margin-bottom: 50px;">
+                <div class="story-image-group reveal-card-left">
+                    <img src="https://plus.unsplash.com/premium_photo-1681276169450-4504a2442173?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Timeless design" class="story-img-main">
+                    <img src="https://cdn.pixabay.com/photo/2023/05/23/09/23/pearl-8012322_1280.jpg"
+                        alt="Legacy creation" class="story-img-accent reveal-image" style="transition-delay: 0.2s;">
+                </div>
+                <div class="story-text-content reveal-fade" style="transition-delay: 0.1s;">
+                    <span class="story-tagline">The Future</span>
+                    <h2 class="reveal-text">A Legacy of Light</h2>
+                    <p>We do not just create jewelry; we engineer heirlooms designed to outlast generations. Each
+                        collection is a testament to the enduring power of beauty and the stories we choose to wear.</p>
+                    <p>Enter the world of AURORA and discover the piece that speaks to your own unique eternity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">AURORA</a>
+                    <p>Discover handcrafted luxury jewelry designed for moments that last forever. Timeless elegance
+                        guaranteed.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 AURORA ATELIER. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-close"><i class="fa-solid fa-xmark"></i></div>
+        <div class="search-container">
+            <h2>What are you looking for?</h2>
+            <form class="search-form"
+                onsubmit="event.preventDefault(); window.location.href='collections.html?search=' + encodeURIComponent(this.querySelector('input').value);">
+                <div class="search-input-group">
+                    <input type="text" placeholder="Search collections, products..." required>
+                    <button type="submit" class="search-btn"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </form>
+            <div class="search-suggestions">
+                <span>Popular:</span>
+                <a href="collections.html?search=Bridal">Bridal Sets</a>
+                <a href="collections.html?search=Eternity">Eternity Rings</a>
+                <a href="collections.html?search=Gold">Gold Chains</a>
+                <a href="collections.html?search=Bespoke">Bespoke</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
