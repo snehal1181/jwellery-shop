@@ -196,6 +196,155 @@ function initCollectionsFilter() {
   }
 }
 
+// Testimonial Slider
+function initTestimonialSlider() {
+  const container = document.querySelector('.testimonial-slider-container');
+  const track = document.querySelector('.testimonial-track');
+  let slides = document.querySelectorAll('.testimonial-card');
+  const nextBtn = document.querySelector('.slider-control.next');
+  const prevBtn = document.querySelector('.slider-control.prev');
+  const dotsContainer = document.querySelector('.slider-dots');
+
+  if (!container || !track || slides.length === 0) return;
+
+  const originalSlideCount = slides.length;
+  let currentIndex = originalSlideCount; // Start after clones
+  let isTransitioning = false;
+  let autoSlideInterval;
+
+  // Clone slides for infinite loop
+  const slidesToClone = 3;
+  for (let i = 0; i < slidesToClone; i++) {
+    const startClone = slides[i].cloneNode(true);
+    const endClone = slides[slides.length - 1 - i].cloneNode(true);
+    track.appendChild(startClone);
+    track.prepend(endClone);
+  }
+
+  // Update slides reference
+  slides = document.querySelectorAll('.testimonial-card');
+
+  // Create Dots
+  for (let i = 0; i < originalSlideCount; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i + slidesToClone));
+    dotsContainer.appendChild(dot);
+  }
+
+  const dots = document.querySelectorAll('.dot');
+
+  function updateSlider(animate = true) {
+    if (!animate) track.style.transition = 'none';
+    else track.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+
+    const slideWidth = slides[0].offsetWidth + 30; // Including gap
+    const offset = currentIndex * slideWidth;
+    
+    // Centering the slider: 
+    // We want the currentIndex slide to be in the center of the container
+    const containerWidth = container.offsetWidth;
+    const centerOffset = (containerWidth - slides[0].offsetWidth) / 2;
+    
+    track.style.transform = `translateX(${-offset + centerOffset}px)`;
+
+    // Handle Dots Active State
+    const activeDotIndex = (currentIndex - slidesToClone + originalSlideCount) % originalSlideCount;
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === activeDotIndex);
+    });
+
+    // Handle Active Card Highlight
+    slides.forEach((slide, index) => {
+      slide.classList.toggle('active-card', index === currentIndex);
+    });
+
+    if (!animate) {
+      // Force reflow
+      track.offsetHeight;
+      track.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+    }
+  }
+
+  function handleBoundary() {
+    isTransitioning = false;
+    if (currentIndex <= slidesToClone - 1) {
+      currentIndex = originalSlideCount + currentIndex;
+      updateSlider(false);
+    } else if (currentIndex >= originalSlideCount + slidesToClone) {
+      currentIndex = currentIndex - originalSlideCount;
+      updateSlider(false);
+    }
+  }
+
+  track.addEventListener('transitionend', handleBoundary);
+
+  function goToSlide(index) {
+    if (isTransitioning) return;
+    currentIndex = index;
+    isTransitioning = true;
+    updateSlider();
+    resetAutoSlide();
+  }
+
+  function nextSlide() {
+    if (isTransitioning) return;
+    currentIndex++;
+    isTransitioning = true;
+    updateSlider();
+  }
+
+  function prevSlide() {
+    if (isTransitioning) return;
+    currentIndex--;
+    isTransitioning = true;
+    updateSlider();
+  }
+
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(nextSlide, 5000);
+  }
+
+  function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetAutoSlide();
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetAutoSlide();
+    });
+  }
+
+  // Intersection Observer to start auto-slide only when in view
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      startAutoSlide();
+    } else {
+      clearInterval(autoSlideInterval);
+    }
+  }, { threshold: 0.1 });
+
+  observer.observe(container);
+
+  // Resize handling
+  window.addEventListener('resize', () => updateSlider(false));
+
+  // Initial call - wait a frame for styles
+  requestAnimationFrame(() => {
+    updateSlider(false);
+  });
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
   createParticles();
@@ -206,9 +355,32 @@ document.addEventListener('DOMContentLoaded', () => {
   renderWishlistPage();
   initCart();
   renderCartPage();
+  initTestimonialSlider();
+  handleHashFilter();
   // Trigger initial checks
   window.dispatchEvent(new Event('scroll'));
 });
+
+// Handle URL hash for filtering on collections page
+function handleHashFilter() {
+  if (window.location.pathname.includes('collections.html') && window.location.hash) {
+    const filter = window.location.hash.substring(1); // Remove #
+    const filterBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+    if (filterBtn) {
+      setTimeout(() => {
+        filterBtn.click();
+        // Smooth scroll to results
+        const filterBar = document.querySelector('.filter-bar');
+        if (filterBar) {
+          filterBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 500); // Small delay to ensure everything is rendered
+    }
+  }
+}
+
+// Listen for hash changes if on the same page
+window.addEventListener('hashchange', handleHashFilter);
 
 // Search Overlay Logic
 if (searchIcons.length > 0 && searchOverlay) {
