@@ -7,11 +7,6 @@
     "dark": "#166534"
   },
   "navigation": [
-    {
-      "group": "Getting Started",
-      "pages": [
-        "README"
-      ]
-    }
+    "README"
   ]
 }
