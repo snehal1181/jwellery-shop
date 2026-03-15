@@ -1,0 +1,45 @@
+# Jewellery Shop Website
+
+## Project Overview
+The Jewellery Shop Website is a responsive front-end web application designed to showcase jewellery products. It provides different pages for product collections, featured items, contact information, and company details.
+
+## Technologies Used
+- HTML5
+- CSS3
+- JavaScript
+
+## Project Structure
+
+jwellery-shop/
+│
+├── index.html          # Homepage of the website
+├── about.html          # Information about the jewellery shop
+├── collections.html    # Jewellery collections display
+├── contact.html        # Contact page
+├── featured.html       # Featured jewellery products
+├── style.css           # Website styling
+└── script.js           # Website functionality
+
+## Features
+- Responsive design
+- Jewellery product collections
+- Featured product showcase
+- Contact page
+- Smooth navigation
+
+## How to Run the Project
+
+1. Clone the repository
+
+git clone https://github.com/your-username/jwellery-shop.git
+
+2. Open the project folder
+
+3. Run the website
+
+Open **index.html** in your browser.
+
+## Future Improvements
+- Add product filtering
+- Add shopping cart
+- Integrate backend for product management
