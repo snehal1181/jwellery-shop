@@ -1,9 +1,0 @@
-{
-  "name": "Jwellery Shop",
-  "navigation": [
-    {
-      "group": "Getting Started",
-      "pages": ["introduction"]
-    }
-  ]
-}
