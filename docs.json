@@ -9,7 +9,12 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["introduction"]
+      "pages": [
+        "introduction"
+      ]
     }
-  ]
+  ],
+  "footerSocials": {
+    "github": "https://github.com/snehal1181/jwellery-shop"
+  }
 }
