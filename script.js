@@ -4,6 +4,88 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const overlay = document.querySelector('.overlay');
 
+// Global Components (Loader & Toast)
+function initGlobalComponents() {
+  // Loader
+  const loader = document.createElement('div');
+  loader.className = 'global-loader active'; // Start active
+  loader.id = 'global-loader';
+  loader.innerHTML = `
+    <div class="aurora-page-loader">
+      <div class="loader-jewel-wrapper">
+        <div class="loader-orbit loader-orbit--outer">
+          <div class="loader-gem loader-gem--1">✦</div>
+          <div class="loader-gem loader-gem--2">✦</div>
+          <div class="loader-gem loader-gem--3">✦</div>
+        </div>
+        <div class="loader-orbit loader-orbit--mid">
+          <div class="loader-gem loader-gem--4">✦</div>
+          <div class="loader-gem loader-gem--5">✦</div>
+        </div>
+        <div class="loader-orbit loader-orbit--inner"></div>
+        <div class="loader-core">
+          <div class="loader-core-gem">✧</div>
+        </div>
+      </div>
+      <h1 class="loader-brand">AURORA</h1>
+      <p class="loader-text">Awakening brilliance</p>
+    </div>
+  `;
+  document.body.appendChild(loader);
+
+  // Toast Container
+  const toastContainer = document.createElement('div');
+  toastContainer.id = 'toast-container';
+  toastContainer.className = 'toast-container';
+  document.body.appendChild(toastContainer);
+
+  // Hide loader when page is fully loaded
+  window.addEventListener('load', () => {
+    setTimeout(hideLoader, 500); // Small delay for smooth transition
+  });
+}
+
+window.showLoader = function () {
+  const loader = document.getElementById('global-loader');
+  if (loader) loader.classList.add('active');
+}
+
+window.hideLoader = function () {
+  const loader = document.getElementById('global-loader');
+  if (loader) loader.classList.remove('active');
+}
+
+window.showToast = function (message, type = 'success') {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+
+  const icon = type === 'success' ? '<i class="fa-solid fa-check-circle"></i>' : '<i class="fa-solid fa-info-circle"></i>';
+
+  toast.innerHTML = `
+    <div class="toast-icon">${icon}</div>
+    <div class="toast-message">${message}</div>
+    <button class="toast-close" onclick="this.parentElement.remove()"><i class="fa-solid fa-xmark"></i></button>
+  `;
+
+  container.appendChild(toast);
+
+  // Animate in
+  setTimeout(() => toast.classList.add('active'), 10);
+
+  // Auto remove
+  setTimeout(() => {
+    toast.classList.remove('active');
+    setTimeout(() => toast.remove(), 400); // Wait for transition
+  }, 4000);
+}
+
+// Call immediately to inject the loader as fast as possible
+initGlobalComponents();
+
+
 // Search Elements
 const searchIcons = document.querySelectorAll('.fa-magnifying-glass');
 const searchOverlay = document.querySelector('.search-overlay');
@@ -241,12 +323,12 @@ function initTestimonialSlider() {
 
     const slideWidth = slides[0].offsetWidth + 30; // Including gap
     const offset = currentIndex * slideWidth;
-    
+
     // Centering the slider: 
     // We want the currentIndex slide to be in the center of the container
     const containerWidth = container.offsetWidth;
     const centerOffset = (containerWidth - slides[0].offsetWidth) / 2;
-    
+
     track.style.transform = `translateX(${-offset + centerOffset}px)`;
 
     // Handle Dots Active State
@@ -510,24 +592,36 @@ function initWishlist() {
 }
 
 function toggleWishlist(item, btn) {
-  let wishlist = JSON.parse(localStorage.getItem('auroraWishlist')) || [];
-  const index = wishlist.findIndex(i => i.title === item.title);
-  const icon = btn ? btn.querySelector('i') : null;
+  // Show synthetic loader for premium feel
+  showLoader();
 
-  if (index > -1) {
-    wishlist.splice(index, 1);
-    if (btn) {
-      btn.classList.remove('active');
-      icon.classList.replace('fa-solid', 'fa-regular');
+  setTimeout(() => {
+    let wishlist = JSON.parse(localStorage.getItem('auroraWishlist')) || [];
+    const index = wishlist.findIndex(i => i.title === item.title);
+    const icon = btn ? btn.querySelector('i') : null;
+    let message = "";
+
+    if (index > -1) {
+      wishlist.splice(index, 1);
+      if (btn) {
+        btn.classList.remove('active');
+        icon.classList.replace('fa-solid', 'fa-regular');
+      }
+      message = `${item.title} removed from favourites`;
+    } else {
+      wishlist.push(item);
+      if (btn) {
+        btn.classList.add('active');
+        icon.classList.replace('fa-regular', 'fa-solid');
+      }
+      message = `${item.title} added to favourites!`;
     }
-  } else {
-    wishlist.push(item);
-    if (btn) {
-      btn.classList.add('active');
-      icon.classList.replace('fa-regular', 'fa-solid');
-    }
-  }
-  localStorage.setItem('auroraWishlist', JSON.stringify(wishlist));
+
+    localStorage.setItem('auroraWishlist', JSON.stringify(wishlist));
+
+    hideLoader();
+    showToast(message, 'success');
+  }, 600); // 600ms artificial delay for premium UX
 }
 
 function isInWishlist(title) {
@@ -641,17 +735,24 @@ function addToCartFromCard(card) {
 }
 
 function addToCart(item) {
-  let cart = JSON.parse(localStorage.getItem('auroraCart')) || [];
-  const existingItem = cart.find(i => i.title === item.title);
+  // Show synthetic loader to make interaction feel premium and robust
+  showLoader();
 
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    cart.push(item);
-  }
+  setTimeout(() => {
+    let cart = JSON.parse(localStorage.getItem('auroraCart')) || [];
+    const existingItem = cart.find(i => i.title === item.title);
 
-  localStorage.setItem('auroraCart', JSON.stringify(cart));
-  alert(`${item.title} added to cart!`);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push(item);
+    }
+
+    localStorage.setItem('auroraCart', JSON.stringify(cart));
+
+    hideLoader();
+    showToast(`${item.title} added to cart!`, 'success');
+  }, 600); // 600ms artificial delay
 }
 
 function renderCartPage() {
@@ -674,39 +775,77 @@ function renderCartPage() {
   }
 
   let total = 0;
+  let itemsHTML = '';
 
-  cart.forEach(item => {
+  cart.forEach((item, index) => {
     // Calculate total if price is numeric
     const priceNum = parseFloat(item.price.replace(/[^0-9.]/g, ''));
     if (!isNaN(priceNum)) {
       total += priceNum * item.quantity;
     }
 
-    const itemHTML = `
-      <div class="cart-item">
-        <img src="${item.img}" alt="${item.title}">
-        <div class="cart-item-info">
-          <h3 class="cart-item-title">${item.title}</h3>
-          <div class="cart-item-price">${item.price}</div>
+    itemsHTML += `
+      <div class="cart-item-card" style="animation-delay: ${index * 0.1}s">
+        <div class="cart-item-image">
+          <img src="${item.img}" alt="${item.title}">
         </div>
-        <div class="cart-controls">
-          <button class="qty-btn" onclick="updateCartQuantity('${item.title.replace(/'/g, "\\'")}', -1)"><i class="fa-solid fa-minus"></i></button>
-          <span style="font-weight: 600; width: 30px; text-align: center;">${item.quantity}</span>
-          <button class="qty-btn" onclick="updateCartQuantity('${item.title.replace(/'/g, "\\'")}', 1)"><i class="fa-solid fa-plus"></i></button>
+        <div class="cart-item-details">
+          <div class="cart-item-header">
+            <h3 class="cart-item-title">${item.title}</h3>
+            <div class="cart-item-price">${item.price}</div>
+          </div>
+          <p class="cart-item-ref">REF: ${Math.floor(Math.random() * 899999 + 100000)}</p>
+          <div class="cart-item-actions">
+            <div class="cart-controls">
+              <button class="qty-btn" onclick="updateCartQuantity('${item.title.replace(/'/g, "\\'")}', -1)"><i class="fa-solid fa-minus"></i></button>
+              <span class="qty-display">${item.quantity}</span>
+              <button class="qty-btn" onclick="updateCartQuantity('${item.title.replace(/'/g, "\\'")}', 1)"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <button class="remove-action" onclick="removeFromCart('${item.title.replace(/'/g, "\\'")}')" title="Remove item"><i class="fa-regular fa-trash-can"></i></button>
+          </div>
         </div>
-        <button class="remove-btn" onclick="removeFromCart('${item.title.replace(/'/g, "\\'")}')" title="Remove Item"><i class="fa-solid fa-trash"></i></button>
       </div>
     `;
-    container.innerHTML += itemHTML;
   });
 
-  const summaryHTML = `
-    <div class="cart-summary">
-      <h3 style="margin-bottom: 20px;">Total: $${total.toLocaleString()}</h3>
-      <button class="btn btn-primary" onclick="placeOrder()">Place Order</button>
+  const sidebarHTML = `
+    <div class="cart-sidebar">
+      <div class="cart-summary-card">
+        <h3>Order Summary</h3>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>$${total.toLocaleString()}</span>
+        </div>
+        <div class="summary-row">
+          <span>Complimentary Shipping</span>
+          <span>$0</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-row total-row">
+          <span>Estimated Total</span>
+          <span>$${total.toLocaleString()}</span>
+        </div>
+        <button class="btn btn-primary checkout-btn" onclick="placeOrder()">Proceed to Checkout</button>
+        
+        <div class="trust-badges">
+          <div class="trust-badge"><i class="fa-solid fa-shield-halved"></i> Secure Checkout</div>
+        </div>
+      </div>
+      <div class="cart-help">
+        <p>Need assistance?</p>
+        <a href="contact.html">Contact our Concierge</a>
+      </div>
     </div>
   `;
-  container.innerHTML += summaryHTML;
+
+  container.innerHTML = `
+    <div class="cart-layout">
+      <div class="cart-items-list">
+        ${itemsHTML}
+      </div>
+      ${sidebarHTML}
+    </div>
+  `;
 }
 
 window.updateCartQuantity = function (title, change) {
@@ -731,7 +870,16 @@ window.removeFromCart = function (title) {
 }
 
 window.placeOrder = function () {
-  alert("Thank you for your order! Our concierge will contact you shortly.");
-  localStorage.removeItem('auroraCart');
-  renderCartPage();
+  showLoader();
+  setTimeout(() => {
+    hideLoader();
+    showToast("Thank you for your order! Our concierge will contact you shortly.", 'success');
+    localStorage.removeItem('auroraCart');
+    renderCartPage();
+
+    // Optional: Redirect back to home after order
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 3000);
+  }, 1000);
 }
