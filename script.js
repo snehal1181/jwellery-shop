@@ -673,6 +673,7 @@ window.removeFromWishlist = function (title) {
     wishlist.splice(index, 1);
     localStorage.setItem('auroraWishlist', JSON.stringify(wishlist));
     renderWishlistPage();
+    showToast(`${title} removed from favourites`, 'info');
   }
 }
 
@@ -856,6 +857,7 @@ window.updateCartQuantity = function (title, change) {
     item.quantity += change;
     if (item.quantity <= 0) {
       cart = cart.filter(i => i.title !== title);
+      showToast(`${title} removed from cart`, 'info');
     }
     localStorage.setItem('auroraCart', JSON.stringify(cart));
     renderCartPage();
@@ -867,6 +869,7 @@ window.removeFromCart = function (title) {
   cart = cart.filter(i => i.title !== title);
   localStorage.setItem('auroraCart', JSON.stringify(cart));
   renderCartPage();
+  showToast(`${title} removed from cart`, 'info');
 }
 
 window.placeOrder = function () {
