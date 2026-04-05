@@ -30,12 +30,6 @@ jwel shop/
 │
 └── assets/
     ├── hero_bg_folded_silk.png     # Homepage hero background
-    ├── hero_bg_blackish.png        # Alternate hero background
-    ├── hero_bg_cloth_sparkle.png   # Alternate hero background
-    ├── hero_bg_emerald.png         # Alternate hero background
-    ├── hero_bg_premium.png         # Alternate hero background
-    ├── hero_bg_premium_v2.png      # Alternate hero background
-    ├── hero_bg_sparkle.png         # Alternate hero background
     └── about_hero.png              # Brand Story page hero background
 ```
 

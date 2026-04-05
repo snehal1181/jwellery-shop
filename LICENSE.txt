@@ -1,0 +1,50 @@
+MIT License
+
+Copyright (c) 2026 AURORA ATELIER
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-------------------------------------------------------------------------------
+
+IMAGE DISCLAIMER
+-------------------------------------------------------------------------------
+
+ALL IMAGES USED IN THIS PROJECT ARE FOR DEMONSTRATION PURPOSES ONLY.
+
+The images displayed throughout this website — including product photography,
+hero backgrounds, testimonial avatars, and any other visual assets sourced from
+third-party platforms (such as Unsplash, Pexels, Pixabay, Flaticon, or similar
+services) — are used solely for demonstration, prototyping, and educational
+purposes.
+
+These images:
+  - Are NOT owned by AURORA ATELIER or the project authors.
+  - Are NOT intended for commercial use.
+  - Are subject to the original licensing terms of their respective sources.
+  - Must be replaced with properly licensed or original assets before any
+    commercial deployment of this project.
+
+If you intend to use this project commercially, you are solely responsible for
+ensuring that all images and media assets comply with applicable copyright laws
+and licensing agreements.
+
+For image credits and original sources, please refer to the README.md file or
+the inline HTML comments within the source code.
+
+-------------------------------------------------------------------------------
